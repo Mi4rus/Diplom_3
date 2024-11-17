@@ -16,14 +16,14 @@ public class ConstructorMainPage {
      public ConstructorMainPage(WebDriver driver) {
           this.driver = driver;
      }
-
+     private final static By LOGO_BUTTON = By.cssSelector("#root div > a > svg");
      private static final By ACCOUNT_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Личный Кабинет']");
      private static final By LOGIN_ACCOUNT_BUTTON = By.xpath(".//button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg' and text() = 'Войти в аккаунт']");
      private static final By CONSTRUCTOR_HEADER_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Конструктор']");
      private static final By ORDER_FEED_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Лента Заказов']");
-     private static final By BUNS_BUTTON = By.xpath(".//span[@class = 'text text_type_main-default' and text() = 'Булки']");
-     private static final By SAUCES_BUTTON = By.xpath(".//span[@class = 'text text_type_main-default' and text() = 'Соусы']");
-     private static final By FILLINGS_BUTTON = By.xpath(".//span[@class = 'text text_type_main-default' and text() = 'Начинки']");
+     private static final By BUNS_BUTTON = By.cssSelector(".tab_tab__1SPyG:nth-child(1)");
+     private static final By SAUCES_BUTTON = By.cssSelector(".tab_tab__1SPyG:nth-child(2)");
+     private static final By FILLINGS_BUTTON = By.cssSelector(".tab_tab__1SPyG:nth-child(3)");
      private final static By MENU = By.xpath(".//div[@class = 'BurgerIngredients_ingredients__menuContainer__Xu3Mo']");
      private final static By SEND_ORDER = By.xpath(".//button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg' and text() = 'Оформить заказ']");
 
@@ -65,7 +65,7 @@ public class ConstructorMainPage {
 
      @Step("Ожидание загрузки меню ингридиентов")
      public void waitForLoadPage() {
-          new WebDriverWait(driver, Duration.ofSeconds(5))
+          new WebDriverWait(driver, Duration.ofSeconds(10))
                   .until(ExpectedConditions.visibilityOfElementLocated(MENU));
      }
 
@@ -76,18 +76,37 @@ public class ConstructorMainPage {
 
      @Step("Ожидание загрузки соусов")
      public void waitClickSauces() {
-          new WebDriverWait(driver, Duration.ofSeconds(5))
-                  .until(ExpectedConditions.elementToBeClickable(SAUCES_BUTTON));
+          new WebDriverWait(driver, Duration.ofSeconds(10))
+                  .until(ExpectedConditions.visibilityOfElementLocated(SAUCES_BUTTON));
      }
      @Step("Ожидание загрузки булок")
      public void waitClickBuns() {
-          new WebDriverWait(driver, Duration.ofSeconds(5))
-                  .until(ExpectedConditions.elementToBeClickable(BUNS_BUTTON));
+          new WebDriverWait(driver, Duration.ofSeconds(10))
+                  .until(ExpectedConditions.visibilityOfElementLocated(BUNS_BUTTON));
      }
      @Step("Ожидание загрузки начинок")
      public void waitClickFillings() {
-          new WebDriverWait(driver, Duration.ofSeconds(5))
-                  .until(ExpectedConditions.elementToBeClickable(FILLINGS_BUTTON));
+          new WebDriverWait(driver, Duration.ofSeconds(10))
+                  .until(ExpectedConditions.visibilityOfElementLocated(FILLINGS_BUTTON));
      }
+
+     @Step("Проверка смены стиля у таба \"Соусы\"")
+     public void changeStyleSauces(){
+          new WebDriverWait(driver,Duration.ofSeconds(10))
+                  .until(ExpectedConditions.attributeContains(SAUCES_BUTTON, "class","current"));
+     }
+
+     @Step("Проверка смены стиля у таба \"Булки\"")
+     public void changeStyleBuns(){
+          new WebDriverWait(driver,Duration.ofSeconds(10))
+                  .until(ExpectedConditions.attributeContains(BUNS_BUTTON, "class","current"));
+     }
+
+     @Step("Проверка смены стиля у таба \"Начинки\"")
+     public void changeStyleFillings(){
+          new WebDriverWait(driver,Duration.ofSeconds(10))
+                  .until(ExpectedConditions.attributeContains(FILLINGS_BUTTON, "class","current"));
+     }
+
 }
 

@@ -9,30 +9,35 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class LoginPage {
+
+    private final String EMAIL = "1test-data1@yandex.ru";
+    private final String INCORRECT_PASSWORD = "12345";
+    private final String CORRECT_PASSWORD = "123456";
+
     //    Адрес страницы
     private final static String STELLAR_LOGIN_URL = "https://stellarburgers.nomoreparties.site/login";
     //    Кнопка-Логотип "Stellar Burgers"
-    private final static By LOGO_BUTTON = By.cssSelector("#root > div > header > nav > div > a > svg");
+    private final static By LOGO_BUTTON = By.cssSelector("#root div > a > svg");
     //    Кнопка "Конструктор" в хедере
-    private final static By HEADER_CONSTRUCTOR_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[1]/a/p");
+    private final static By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Конструктор']");
     //    Кнопка "Лента Заказов"
-    private final static By ORDERS_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[2]/a/p");
+    private final static By ORDERS_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Лента Заказов']");
     //    Кнопка "Личный Кабинет"
-    private final static By ACCOUNT_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/a/p");
+    private final static By ACCOUNT_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Личный Кабинет']");
     //    Поле "Email"
-    private final static By EMAIL_INPUT_FIELD = By.xpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input");
+    private final static By EMAIL_INPUT_FIELD = By.xpath(".//input[@class = 'text input__textfield text_type_main-default' and @name = 'name']");
     //    Поле "Пароль"
-    private final static By PASSWORD_INPUT_FIELD = By.xpath("//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input");
+    private final static By PASSWORD_INPUT_FIELD = By.xpath(".//input[@class = 'text input__textfield text_type_main-default' and @name = 'Пароль']");
     //    Кнопка "Войти"
-    private final static By ENTER_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/form/button");
+    private final static By ENTER_BUTTON = By.xpath(".//button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa' and text() = 'Войти']");
     //    Кнопка "Зарегистрироваться"
-    private final static By REGISTER_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/div/p[1]/a");
+    private final static By REGISTER_BUTTON = By.xpath(".//a[@class = 'Auth_link__1fOlj' and text() = 'Зарегистрироваться']");
     //    Кнопка "Восстановить пароль"
-    private final static By FORGOT_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/div/p[2]/a");
+    private final static By FORGOT_BUTTON = By.xpath(".//a[@class = 'Auth_link__1fOlj' and text() = 'Восстановить пароль']");
     //    Ошибка "Некорректный пароль"
-    private final static By PASSWORD_ERROR = By.xpath("//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/p");
+    private final static By PASSWORD_ERROR = By.xpath(".//p[@class = 'input__error text_type_main-default' and text() = 'Некорректный пароль']");
     //    Заголовок "Вход"
-    private final static By HEADER_INPUT = By.xpath("//*[@id=\"root\"]/div/main/div/h2");
+    private final static By HEADER_INPUT = By.xpath(".//h2[text() = 'Вход']");
 
     private final WebDriver driver;
 
@@ -85,21 +90,21 @@ public class LoginPage {
     @Step("Заполнить поле \"Email\"")
     public LoginPage inputEmail() {
         driver.findElement(EMAIL_INPUT_FIELD).click();
-        driver.findElement(EMAIL_INPUT_FIELD).sendKeys("1test-data1@yandex.ru");
+        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(EMAIL);
         return this;
     }
 
     @Step("Заполнить поле \"Пароль\" некорректным значением")
     public LoginPage inputPasswordWithFiveChars() {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys("12345");
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(INCORRECT_PASSWORD);
         return this;
     }
 
     @Step("Заполнить поле \"Пароль\" корректным значением")
     public LoginPage inputPasswordWithSixChars() {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys("123456");
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(CORRECT_PASSWORD);
         return this;
     }
 

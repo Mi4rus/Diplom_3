@@ -11,17 +11,25 @@ import praktikum.pageobject.ConstructorMainPage;
 import praktikum.pageobject.LoginPage;
 import praktikum.pageobject.ProfilePage;
 import praktikum.pageobject.RegisterPage;
+import io.restassured.response.ValidatableResponse;
+import praktikum.pageobject.user.User;
+import praktikum.pageobject.user.UserChecks;
+import praktikum.pageobject.user.UserClient;
+import praktikum.pageobject.user.UserCredentionals;
 
 import java.time.Duration;
 
 import static io.restassured.RestAssured.given;
 
 public class ExitTest {
+    private UserClient client = new UserClient();
+    private UserChecks check = new UserChecks();
     private ConstructorMainPage objMainPage;
     private LoginPage objLoginPage;
     private RegisterPage objRegisterPage;
     private ProfilePage objProfilePage;
     private WebDriver driver;
+    String accessToken;
 
     @Before
     public void startUp() {
@@ -46,6 +54,14 @@ public class ExitTest {
         objRegisterPage.inputEmail();//ввод почты
         objRegisterPage.inputPasswordWithSixChars();//ввод пароля
         objRegisterPage.clickRegisterButton();//клик на "Зарегистрироваться"
+//        var user = User.randomUser();
+//        ValidatableResponse createResponse = client.createUser(user);
+//        check.checkCreated(createResponse);
+//
+//        var creds = UserCredentionals.fromUser(user);
+//        ValidatableResponse loginResponse = client.loginUser(creds);
+//        accessToken = check.checkLoggedIn(loginResponse);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
         objLoginPage.isLoginPageWindowOpen();//проверка открытия окна входа
@@ -54,7 +70,7 @@ public class ExitTest {
 
     @Test
     @DisplayName("Проверка выхода по кнопке «Выйти» в личном кабинете")
-    public void SuccessfulExitFromAccount() {
+    public void successfulExitFromAccount() {
         objMainPage.clickAccountButton();//клик на "Личный кабинет"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
@@ -78,6 +94,10 @@ public class ExitTest {
     @After
     public void cleanUp() {
         driver.quit();
+        if(accessToken != null){
+            ValidatableResponse response = client.deleteUser(accessToken);
+            check.deleteUser(response);
+        }
         String accessToken = given()
                 .header("Content-Type", "application/json")
                 .log().all() // логируем реквест

@@ -54,7 +54,7 @@ public class TransitionTest {
 
     @Test
     @DisplayName("Проверка перехода в личный кабинет по клику на Личный кабинет")
-    public void SuccessfulTransitionWithAccountButton() {
+    public void successfulTransitionWithAccountButton() {
         objMainPage.clickAccountButton();//клик на "Личный кабинет"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
@@ -73,7 +73,7 @@ public class TransitionTest {
 
     @Test
     @DisplayName("Проверка перехода из личного кабинета в конструктор по клику на Конструктор")
-    public void SuccessfulTransitionWithConstructorButton() {
+    public void successfulTransitionWithConstructorButton() {
         objMainPage.clickAccountButton();//клик на "Личный кабинет"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
@@ -96,7 +96,7 @@ public class TransitionTest {
 
     @Test
     @DisplayName("Проверка перехода из личного кабинета в конструктор по клику на логотип")
-    public void SuccessfulTransitionWithLogoButton() {
+    public void successfulTransitionWithLogoButton() {
         objMainPage.clickAccountButton();//клик на "Личный кабинет"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"

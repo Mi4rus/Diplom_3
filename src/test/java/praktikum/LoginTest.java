@@ -51,7 +51,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Проверка входа по кнопке Войти в аккаунт на главной")
-    public void SuccessfulLoginWithButtonEnterInAccount() {
+    public void successfulLoginWithButtonEnterInAccount() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
@@ -66,7 +66,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Проверка входа через кнопку Личный кабинет")
-    public void SuccessfulLoginWithAccountButton() {
+    public void successfulLoginWithAccountButton() {
         objMainPage.clickAccountButton();//клик на "Личный кабинет"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
@@ -81,7 +81,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Проверка входа через кнопку в форме регистрации")
-    public void SuccessfulLoginWithRegisterPageButton() {
+    public void successfulLoginWithRegisterPageButton() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         objLoginPage.clickRegisterButton();//клик на "Зарегистрироваться"
         objRegisterPage.clickEnterButton();//клик на "Войти"
@@ -98,7 +98,7 @@ public class LoginTest {
 
     @Test
     @DisplayName("Проверка входа через кнопку в форме восстановления пароля")
-    public void SuccessfulLoginWithResetPasswordPageButton() {
+    public void successfulLoginWithResetPasswordPageButton() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         objLoginPage.clickForgotButton();//клик на "Восстановить пароль"
         objRegisterPage.clickEnterButton();//клик на "Войти"

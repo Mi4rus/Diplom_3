@@ -37,7 +37,7 @@ public class FailRegistrationTest {
 
     @Test
     @DisplayName("Проверка ошибки для некорректного пароля меньше шести символов")
-    public void CheckPasswordErrorIfLessSixChars() {
+    public void checkPasswordErrorIfLessSixChars() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         objLoginPage.clickRegisterButton();//клик на "Зарегистрироваться"
         objRegisterPage.inputName();//ввод имени

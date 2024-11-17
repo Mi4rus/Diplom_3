@@ -9,22 +9,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ForgotPasswordPage {
+
+    private final String EMAIL = "1test-data1@yandex.ru";
     //    Адрес страницы
     private final static String STELLAR_FORGOT_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
     //    Кнопка-Логотип "Stellar Burgers"
-    private final static By LOGO_BUTTON = By.cssSelector("#root > div > header > nav > div > a > svg");
+    private final static By LOGO_BUTTON = By.cssSelector("#root div > a > svg");
     //    Кнопка "Конструктор" в хедере
-    private final static By HEADER_CONSTRUCTOR_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[1]/a/p");
+    private final static By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Конструктор']");
     //    Кнопка "Лента Заказов"
-    private final static By ORDERS_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[2]/a/p");
+    private final static By ORDERS_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Лента Заказов']");
     //    Кнопка "Личный Кабинет"
-    private final static By ACCOUNT_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/a/p");
+    private final static By ACCOUNT_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Личный Кабинет']");
     //    Поле "Email"
-    private final static By EMAIL_INPUT_FIELD = By.xpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input");
+    private final static By EMAIL_INPUT_FIELD = By.xpath(".//input[@class = 'text input__textfield text_type_main-default']");
     //    Кнопка "Войти"
-    private final static By ENTER_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/div/p/a");
+    private final static By ENTER_BUTTON = By.xpath(".//a[@class = 'Auth_link__1fOlj' and text() = 'Войти']");
     //    Кнопка "Восстановить"
-    private final static By RECOVER_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/form/button");
+    private final static By RECOVER_BUTTON = By.xpath(".//button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa' and text() = 'Восстановить']");
 
     private final WebDriver driver;
 
@@ -77,7 +79,7 @@ public class ForgotPasswordPage {
     @Step("Заполнить поле \"Email\"")
     public ForgotPasswordPage inputEmail() {
         driver.findElement(EMAIL_INPUT_FIELD).click();
-        driver.findElement(EMAIL_INPUT_FIELD).sendKeys("1test-data1@yandex.ru");
+        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(EMAIL);
         return this;
     }
 

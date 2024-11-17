@@ -9,24 +9,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ResetPasswordPage {
+
+    private final String PASSWORD = "123456";
+    private final String CODE_OF_EMAIL = "12345678";
     //    Адрес страницы
     private final static String STELLAR_RESET_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/reset-password";
     //    Кнопка-Логотип "Stellar Burgers"
-    private final static By LOGO_BUTTON = By.cssSelector("#root > div > header > nav > div > a > svg");
+    private final static By LOGO_BUTTON = By.cssSelector("#root div > a > svg");
     //    Кнопка "Конструктор" в хедере
-    private final static By HEADER_CONSTRUCTOR_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[1]/a/p");
+    private final static By HEADER_CONSTRUCTOR_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Конструктор']");
     //    Кнопка "Лента Заказов"
-    private final static By ORDERS_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/ul/li[2]/a/p");
+    private final static By ORDERS_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Лента Заказов']");
     //    Кнопка "Личный Кабинет"
-    private final static By ACCOUNT_BUTTON = By.xpath("//*[@id=\"root\"]/div/header/nav/a/p");
+    private final static By ACCOUNT_BUTTON = By.xpath(".//p[@class = 'AppHeader_header__linkText__3q_va ml-2' and text() = 'Личный Кабинет']");
     //    Поле "Пароль"
-    private final static By PASSWORD_INPUT_FIELD = By.xpath("//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input");
+    private final static By PASSWORD_INPUT_FIELD = By.xpath(".//div[@class = 'text input__textfield text_type_main-default' and @name = 'Введите новый пароль']");
     //    Поле "Введите код из письма"
-    private final static By CODE_INPUT_FIELD = By.xpath("//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input");
+    private final static By CODE_INPUT_FIELD = By.xpath("//fieldset[2]/div/div/input");
     //    Кнопка "Сохранить"
-    private final static By SAVE_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/form/button");
+    private final static By SAVE_BUTTON = By.xpath(".//button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa' and text() = 'Сохранить']");
     //    Кнопка "Войти"
-    private final static By ENTER_BUTTON = By.xpath("//*[@id=\"root\"]/div/main/div/div/p[1]/a");
+    private final static By ENTER_BUTTON = By.xpath(".//a[@class = 'Auth_link__1fOlj' and text() = 'Войти']");
 
     private final WebDriver driver;
 
@@ -79,7 +82,7 @@ public class ResetPasswordPage {
     @Step("Заполнить поле \"Пароль\"")
     public ResetPasswordPage inputPassword() {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys("123456");
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(PASSWORD);
         return this;
     }
 
@@ -87,7 +90,7 @@ public class ResetPasswordPage {
     @Step("Заполнить поле \"Введите код из письма\"")
     public ResetPasswordPage inputPasswordWithSixChars() {
         driver.findElement(CODE_INPUT_FIELD).click();
-        driver.findElement(CODE_INPUT_FIELD).sendKeys("12345678");
+        driver.findElement(CODE_INPUT_FIELD).sendKeys(CODE_OF_EMAIL);
         return this;
     }
 

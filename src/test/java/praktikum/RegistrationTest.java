@@ -41,7 +41,7 @@ public class RegistrationTest {
 
     @Test
     @DisplayName("Проверка успешной регистрации пользователя")
-    public void SuccessfulRegistration() {
+    public void successfulRegistration() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         objLoginPage.clickRegisterButton();//клик на "Зарегистрироваться"
         objRegisterPage.inputName();//ввод имени
