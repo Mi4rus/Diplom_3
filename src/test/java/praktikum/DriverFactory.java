@@ -2,24 +2,30 @@ package praktikum;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
 import java.time.Duration;
 
-public class DriverRule {
+public class DriverFactory extends ExternalResource {
     private WebDriver driver;
 
+
+
     public void initDriver(){
-        if(System.getProperty("browser").equals("firefox")){
+        if("firefox".equals(System.getProperty("browser"))){
             startFirefox();
         }
         else {
             startChrome();
         }
     }
+    public WebDriver getDriver(){
+        return driver;
+    }
+
     public void startFirefox(){
         WebDriverManager.firefoxdriver().setup();
         var opts = new FirefoxOptions().configureFromEnv();
@@ -30,5 +36,15 @@ public class DriverRule {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+    }
+
+    @Override
+    protected void before() throws Throwable {
+        initDriver();
+    }
+
+    @Override
+    protected void after() {
+        driver.quit();
     }
 }

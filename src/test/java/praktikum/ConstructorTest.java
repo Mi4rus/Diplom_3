@@ -1,28 +1,29 @@
 package praktikum;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.github.bonigarcia.wdm.webdriver.WebDriverBrowser;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import praktikum.pageobject.ConstructorMainPage;
+
+import java.time.Duration;
 
 public class ConstructorTest {
     private ConstructorMainPage objMainPage;
     private WebDriver driver;
 
+    @Rule
+    public DriverFactory factory = new DriverFactory();
+
     @Before
     public void startUp() {
-        WebDriverManager.chromedriver().setup();//драйвер хром
-        driver = new ChromeDriver();//экземпляр драйвера хром
-
-        //замена на драйвер яндекс.браузера (закомментить экземпляр драйвера хрома выше и раскомментить строчки снизу)
-//        ChromeOptions options = new ChromeOptions();
-//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\DNS\\yandexdriver.exe");
-//        options.setBinary("C:\\Users\\DNS\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-//        driver = new ChromeDriver(options);
+        driver=factory.getDriver();
 
         objMainPage = new ConstructorMainPage(driver);//новый объект класса главной страницы
         objMainPage.open();//открытие тестовой страницы
@@ -51,13 +52,7 @@ public class ConstructorTest {
     public void successfulSectionNavigationBuns() {
         objMainPage.waitClickBuns();//вкладка "Булки" кликабельна
         objMainPage.clickFillingsButton();
-        objMainPage.changeStyleFillings();
         objMainPage.clickBunsButton();//клик на вкладку "Булки"
         objMainPage.changeStyleBuns();
-    }
-
-    @After
-    public void cleanUp() {
-        driver.quit();
     }
 }

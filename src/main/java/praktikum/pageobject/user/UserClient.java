@@ -6,7 +6,6 @@ import io.restassured.response.ValidatableResponse;
 public class UserClient extends Client {
     private static final String USER_PATH = "/auth";
 
-
     @Step("Создание пользователя")
     public ValidatableResponse createUser(User user) {
         return spec()
@@ -14,7 +13,6 @@ public class UserClient extends Client {
                 .when()
                 .post(USER_PATH + "/register")
                 .then().log().all();
-
     }
 
     @Step("Авторизация пользователем")
@@ -35,12 +33,4 @@ public class UserClient extends Client {
                 .then().log().all();
     }
 
-    @Step("Получение данных пользователя")
-    public ValidatableResponse getUserData(String token) {
-        return spec()
-                .header("Authorization", token)
-                .when()
-                .get(USER_PATH + "/user")
-                .then().log().all();
-    }
 }

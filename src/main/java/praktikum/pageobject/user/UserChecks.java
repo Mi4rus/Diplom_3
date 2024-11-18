@@ -14,23 +14,6 @@ public class UserChecks {
 
         assertTrue(created);
     }
-    public void checkDuplicateCreateForbidden(ValidatableResponse response){
-        String message = response
-                .assertThat()
-                .statusCode(403)
-                .extract()
-                .path("message");
-        assertEquals(message,"User already exists");
-    }
-
-    public void checkBadRequestCreateForbidden(ValidatableResponse response){
-        String message = response
-                .assertThat()
-                .statusCode(403)
-                .extract()
-                .path("message");
-        assertEquals(message,"Email, password and name are required fields");
-    }
 
     public String checkLoggedIn(ValidatableResponse loginResponse){
         String token = loginResponse
@@ -41,15 +24,14 @@ public class UserChecks {
         assertNotNull(token);
         return token;
     }
-
-    public void checkBadRequestLoginUnauthorized(ValidatableResponse loginResponse){
-        String message = loginResponse
+    public String check401ErrorLoggedIn(ValidatableResponse loginResponse){
+        String token = loginResponse
                 .assertThat()
                 .statusCode(401)
                 .extract()
-                .path("message");
-        assertEquals(message,"email or password are incorrect");
-
+                .path("token");
+        assertNull(token);
+        return token;
     }
 
     public void deleteUser(ValidatableResponse loginResponse){
@@ -61,37 +43,5 @@ public class UserChecks {
         assertEquals(message,"User successfully removed");
     }
 
-    public void checkGetUserData(ValidatableResponse editResponse){
-        boolean success = editResponse
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .path("success");
-        assertTrue(success);
-    }
-    public void checkEditUser(ValidatableResponse editResponse){
-        boolean success = editResponse
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .path("success");
-        assertTrue(success);
-    }
-    public void checkBadRequestEditUnauthorized(ValidatableResponse editResponse){
-        String message = editResponse
-                .assertThat()
-                .statusCode(401)
-                .extract()
-                .path("message");
-        assertEquals(message,"You should be authorised");
-    }
 
-    public void checkDuplicateEmailForbiddenEdit(ValidatableResponse editResponse){
-        String message = editResponse
-                .assertThat()
-                .statusCode(403)
-                .extract()
-                .path("message");
-        assertEquals(message,"User with such email already exists");
-    }
 }

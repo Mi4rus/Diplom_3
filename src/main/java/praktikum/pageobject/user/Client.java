@@ -14,5 +14,6 @@ public class Client {
                 .contentType(ContentType.JSON)
                 .baseUri(BASE_URI)
                 .basePath(BASE_PATH);
+
     }
 }

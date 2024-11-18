@@ -14,12 +14,6 @@ public class UserCredentionals {
         return creds;
     }
 
-    public static UserCredentionals fromNonExistentUser(User user){
-        var creds = new UserCredentionals(user.getEmail() + Math.random(), user.getPassword() + Math.random());
-        return creds;
-    }
-
-
     public String getEmail() {
         return email;
     }

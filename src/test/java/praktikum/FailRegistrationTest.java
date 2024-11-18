@@ -1,32 +1,35 @@
 package praktikum;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.junit4.DisplayName;
+import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import praktikum.pageobject.ConstructorMainPage;
 import praktikum.pageobject.LoginPage;
 import praktikum.pageobject.RegisterPage;
+import praktikum.pageobject.user.User;
+import praktikum.pageobject.user.UserChecks;
+import praktikum.pageobject.user.UserClient;
+import praktikum.pageobject.user.UserCredentionals;
 
 public class FailRegistrationTest {
     private ConstructorMainPage objMainPage;
     private LoginPage objLoginPage;
     private RegisterPage objRegisterPage;
     private WebDriver driver;
+    private UserClient client = new UserClient();
+    private UserChecks check = new UserChecks();
+    private String accessToken;
+
+    @Rule
+    public DriverFactory factory = new DriverFactory();
 
     @Before
     public void startUp() {
-        WebDriverManager.chromedriver().setup();//драйвер хром
-        driver = new ChromeDriver();//экземпляр драйвера хром
-
-        //замена на драйвер яндекс.браузера (закомментить экземпляр драйвера хрома выше и раскомментить строчки снизу)
-//        ChromeOptions options = new ChromeOptions();
-//        System.setProperty("webdriver.chrome.driver", "C:\\Users\\DNS\\yandexdriver.exe");
-//        options.setBinary("C:\\Users\\DNS\\AppData\\Local\\Yandex\\YandexBrowser\\Application\\browser.exe");
-//        driver = new ChromeDriver(options);
+        driver=factory.getDriver();
 
         objMainPage = new ConstructorMainPage(driver);//новый объект класса главной страницы
         objLoginPage = new LoginPage(driver);//новый объект класса страницы "Вход"
@@ -46,9 +49,17 @@ public class FailRegistrationTest {
         objRegisterPage.clickRegisterButton();//клик на "Зарегистрироваться"
         objRegisterPage.isPasswordErrorPresent();//проверка появления ошибки
     }
-
     @After
     public void cleanUp() {
-        driver.quit();
+        var user = User.nonExistentUser();
+        var creds = UserCredentionals.fromUser(user);
+
+        ValidatableResponse loginResponse = client.loginUser(creds);
+        accessToken = check.check401ErrorLoggedIn(loginResponse);
+
+        if(accessToken != null){
+            ValidatableResponse response = client.deleteUser(accessToken);
+            check.deleteUser(response);
+        }
     }
 }
