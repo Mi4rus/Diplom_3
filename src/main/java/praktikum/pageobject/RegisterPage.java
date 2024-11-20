@@ -5,14 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class RegisterPage {
-    private final String NAME = "1Username1";
-    private final String EMAIL = "1test-data1@yandex.ru";
-    private final String INCORRECT_PASSWORD = "12345";
-    private final String CORRECT_PASSWORD = "123456";
     //    Адрес страницы
     private final static String STELLAR_REGISTER_URL = "https://stellarburgers.nomoreparties.site/register";
     //    Кнопка-Логотип "Stellar Burgers"
@@ -87,30 +82,30 @@ public class RegisterPage {
     }
 
     @Step("Заполнить поле \"Имя\"")
-    public RegisterPage inputName() {
+    public RegisterPage inputName(String name) {
         driver.findElement(NAME_INPUT_FIELD).click();
-        driver.findElement(NAME_INPUT_FIELD).sendKeys(NAME);
+        driver.findElement(NAME_INPUT_FIELD).sendKeys(name);
         return this;
     }
 
     @Step("Заполнить поле \"Email\"")
-    public RegisterPage inputEmail() {
+    public RegisterPage inputEmail(String email) {
         driver.findElement(EMAIL_INPUT_FIELD).click();
-        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(EMAIL);
+        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(email);
         return this;
     }
 
     @Step("Заполнить поле \"Пароль\" некорректным значением")
-    public RegisterPage inputPasswordWithFiveChars() {
+    public RegisterPage inputPasswordWithFiveChars(String password) {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(INCORRECT_PASSWORD);
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(password);
         return this;
     }
 
     @Step("Заполнить поле \"Пароль\" корректным значением")
-    public RegisterPage inputPasswordWithSixChars() {
+    public RegisterPage inputPasswordWithSixChars(String password) {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(CORRECT_PASSWORD);
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(password);
         return this;
     }
 

@@ -15,6 +15,7 @@ import praktikum.pageobject.user.UserChecks;
 import praktikum.pageobject.user.UserClient;
 import praktikum.pageobject.user.UserCredentionals;
 import java.time.Duration;
+import static praktikum.pageobject.constants.Constants.*;
 
 public class RegistrationTest {
     private ConstructorMainPage objMainPage;
@@ -44,9 +45,9 @@ public class RegistrationTest {
     public void successfulRegistration() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         objLoginPage.clickRegisterButton();//клик на "Зарегистрироваться"
-        objRegisterPage.inputName();//ввод имени
-        objRegisterPage.inputEmail();//ввод почты
-        objRegisterPage.inputPasswordWithSixChars();//ввод пароля
+        objRegisterPage.inputName(NAME);//ввод имени
+        objRegisterPage.inputEmail(EMAIL);//ввод почты
+        objRegisterPage.inputPasswordWithSixChars(CORRECT_PASSWORD);//ввод пароля
         objRegisterPage.clickRegisterButton();//клик на "Зарегистрироваться"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
@@ -55,7 +56,7 @@ public class RegistrationTest {
 
     @After
     public void cleanUp() {
-        var user = User.randomUser();
+        var user = User.correctUser();
         var creds = UserCredentionals.fromUser(user);
         ValidatableResponse loginResponse = client.loginUser(creds);
         accessToken = check.checkLoggedIn(loginResponse);

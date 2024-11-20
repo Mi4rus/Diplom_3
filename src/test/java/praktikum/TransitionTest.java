@@ -16,6 +16,7 @@ import praktikum.pageobject.user.UserChecks;
 import praktikum.pageobject.user.UserClient;
 import praktikum.pageobject.user.UserCredentionals;
 import java.time.Duration;
+import static praktikum.pageobject.constants.Constants.*;
 
 public class TransitionTest {
     private ConstructorMainPage objMainPage;
@@ -41,7 +42,7 @@ public class TransitionTest {
         objMainPage.open();//открытие тестовой страницы
         objMainPage.waitForLoadPage();//ожидание загрузки
 
-        var user = User.randomUser();
+        var user = User.correctUser();
         ValidatableResponse createResponse = client.createUser(user);
         check.checkCreated(createResponse);
 
@@ -57,8 +58,8 @@ public class TransitionTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
         objLoginPage.isLoginPageWindowOpen();//проверка открытия окна входа
-        objLoginPage.inputEmail();//ввод почты
-        objLoginPage.inputPasswordWithSixChars();//ввод пароля
+        objLoginPage.inputEmail(EMAIL);//ввод почты
+        objLoginPage.inputPasswordWithSixChars(CORRECT_PASSWORD);//ввод пароля
         objLoginPage.clickEnterButton();//клик на "Войти"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия главной страницы
         objMainPage.waitForLoadPage();//ожидание появления окна главной страницы
@@ -76,8 +77,8 @@ public class TransitionTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
         objLoginPage.isLoginPageWindowOpen();//проверка открытия окна входа
-        objLoginPage.inputEmail();//ввод почты
-        objLoginPage.inputPasswordWithSixChars();//ввод пароля
+        objLoginPage.inputEmail(EMAIL);//ввод почты
+        objLoginPage.inputPasswordWithSixChars(CORRECT_PASSWORD);//ввод пароля
         objLoginPage.clickEnterButton();//клик на "Войти"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия главной страницы
         objMainPage.waitForLoadPage();//ожидание появления окна главной страницы
@@ -99,8 +100,8 @@ public class TransitionTest {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия страницы "Вход"
         objLoginPage.waitForLoadPage();//ожидание появления окна "Вход"
         objLoginPage.isLoginPageWindowOpen();//проверка открытия окна входа
-        objLoginPage.inputEmail();//ввод почты
-        objLoginPage.inputPasswordWithSixChars();//ввод пароля
+        objLoginPage.inputEmail(EMAIL);//ввод почты
+        objLoginPage.inputPasswordWithSixChars(CORRECT_PASSWORD);//ввод пароля
         objLoginPage.clickEnterButton();//клик на "Войти"
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));//ожидание открытия главной страницы
         objMainPage.waitForLoadPage();//ожидание появления окна главной страницы

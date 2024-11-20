@@ -1,5 +1,7 @@
 package praktikum.pageobject.user;
 
+import java.util.Random;
+
 public class User {
 
     private String email;
@@ -11,11 +13,12 @@ public class User {
         this.password = password;
         this.name = name;
     }
-    public static User randomUser(){
-        return new User("1test-data1@yandex.ru", "123456", "1Username1");
+    public static User correctUser(){
+        return new User("1test-data1-user@yandex.ru", "123456", "1Username1");
     }
+
     public static User nonExistentUser(){
-        return new User("1test-data1@yandex.ru", "12345", "1Username1");
+        return new User("1test-data1-user@yandex.ru", "12345", "1Username1");
     }
 
     public String getEmail() {

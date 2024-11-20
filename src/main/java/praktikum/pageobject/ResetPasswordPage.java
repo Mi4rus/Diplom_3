@@ -5,13 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class ResetPasswordPage {
-
-    private final String PASSWORD = "123456";
-    private final String CODE_OF_EMAIL = "12345678";
     //    Адрес страницы
     private final static String STELLAR_RESET_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/reset-password";
     //    Кнопка-Логотип "Stellar Burgers"
@@ -80,17 +76,17 @@ public class ResetPasswordPage {
     }
 
     @Step("Заполнить поле \"Пароль\"")
-    public ResetPasswordPage inputPassword() {
+    public ResetPasswordPage inputPassword(String password) {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(PASSWORD);
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(password);
         return this;
     }
 
 
     @Step("Заполнить поле \"Введите код из письма\"")
-    public ResetPasswordPage inputPasswordWithSixChars() {
+    public ResetPasswordPage inputCodeOfEmail(String code) {
         driver.findElement(CODE_INPUT_FIELD).click();
-        driver.findElement(CODE_INPUT_FIELD).sendKeys(CODE_OF_EMAIL);
+        driver.findElement(CODE_INPUT_FIELD).sendKeys(code);
         return this;
     }
 

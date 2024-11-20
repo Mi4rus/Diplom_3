@@ -5,15 +5,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class LoginPage {
-
-    private final String EMAIL = "1test-data1@yandex.ru";
-    private final String INCORRECT_PASSWORD = "12345";
-    private final String CORRECT_PASSWORD = "123456";
-
     //    Адрес страницы
     private final static String STELLAR_LOGIN_URL = "https://stellarburgers.nomoreparties.site/login";
     //    Кнопка-Логотип "Stellar Burgers"
@@ -88,23 +82,23 @@ public class LoginPage {
     }
 
     @Step("Заполнить поле \"Email\"")
-    public LoginPage inputEmail() {
+    public LoginPage inputEmail(String email) {
         driver.findElement(EMAIL_INPUT_FIELD).click();
-        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(EMAIL);
+        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(email);
         return this;
     }
 
     @Step("Заполнить поле \"Пароль\" некорректным значением")
-    public LoginPage inputPasswordWithFiveChars() {
+    public LoginPage inputPasswordWithFiveChars(String password) {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(INCORRECT_PASSWORD);
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(password);
         return this;
     }
 
     @Step("Заполнить поле \"Пароль\" корректным значением")
-    public LoginPage inputPasswordWithSixChars() {
+    public LoginPage inputPasswordWithSixChars(String password) {
         driver.findElement(PASSWORD_INPUT_FIELD).click();
-        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(CORRECT_PASSWORD);
+        driver.findElement(PASSWORD_INPUT_FIELD).sendKeys(password);
         return this;
     }
 

@@ -14,6 +14,7 @@ import praktikum.pageobject.user.User;
 import praktikum.pageobject.user.UserChecks;
 import praktikum.pageobject.user.UserClient;
 import praktikum.pageobject.user.UserCredentionals;
+import static praktikum.pageobject.constants.Constants.*;
 
 public class FailRegistrationTest {
     private ConstructorMainPage objMainPage;
@@ -43,9 +44,9 @@ public class FailRegistrationTest {
     public void checkPasswordErrorIfLessSixChars() {
         objMainPage.clickLoginAccountButton();//клик на "Войти в аккаунт"
         objLoginPage.clickRegisterButton();//клик на "Зарегистрироваться"
-        objRegisterPage.inputName();//ввод имени
-        objRegisterPage.inputEmail();//ввод почты
-        objRegisterPage.inputPasswordWithFiveChars();//ввод пароля
+        objRegisterPage.inputName(NAME);//ввод имени
+        objRegisterPage.inputEmail(EMAIL);//ввод почты
+        objRegisterPage.inputPasswordWithFiveChars(INCORRECT_PASSWORD);//ввод пароля
         objRegisterPage.clickRegisterButton();//клик на "Зарегистрироваться"
         objRegisterPage.isPasswordErrorPresent();//проверка появления ошибки
     }

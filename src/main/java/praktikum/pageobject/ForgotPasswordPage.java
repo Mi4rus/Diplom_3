@@ -5,12 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class ForgotPasswordPage {
 
-    private final String EMAIL = "1test-data1@yandex.ru";
     //    Адрес страницы
     private final static String STELLAR_FORGOT_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/forgot-password";
     //    Кнопка-Логотип "Stellar Burgers"
@@ -77,9 +75,9 @@ public class ForgotPasswordPage {
     }
 
     @Step("Заполнить поле \"Email\"")
-    public ForgotPasswordPage inputEmail() {
+    public ForgotPasswordPage inputEmail(String email) {
         driver.findElement(EMAIL_INPUT_FIELD).click();
-        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(EMAIL);
+        driver.findElement(EMAIL_INPUT_FIELD).sendKeys(email);
         return this;
     }
 

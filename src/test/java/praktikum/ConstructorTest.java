@@ -1,18 +1,11 @@
 package praktikum;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.webdriver.WebDriverBrowser;
 import io.qameta.allure.junit4.DisplayName;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import praktikum.pageobject.ConstructorMainPage;
-
-import java.time.Duration;
 
 public class ConstructorTest {
     private ConstructorMainPage objMainPage;
